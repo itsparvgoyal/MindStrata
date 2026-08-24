@@ -37,7 +37,7 @@ const Login = () => {
       if(response.data.success){
         // console.log("data set" , response.data.user);
         dispatch(setToken(response.data.token));
-        dispatch(setUser(response.data.user));
+        dispatch(setUser(response.data.user));c
         localStorage.setItem("token", JSON.stringify(response.data.token));  
         localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/dashboard/profile")
