@@ -1,8 +1,7 @@
-import axios from "axios";
-require("dotenv").config();
+import axios from "axios";c
 
 const api = axios.create({
-    baseURL: process.env.BACKEND_URL,
+    baseURL: import.meta.env.BACKEND_URL,
     withCredentials: true 
 });
 
