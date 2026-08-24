@@ -52,6 +52,7 @@ const CollapsedSidebar = ({ setCollapsed }) => {
       dispatch(setUser(null));
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("refreshToken");
       toast.success("Logged Out");
       navigate("/login", { replace: true });
     }

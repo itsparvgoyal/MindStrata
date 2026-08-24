@@ -36,9 +36,10 @@ api.interceptors.response.use(
             try {
                 // call the /refresh endpoint to get a new access token
                 // we use standard axios here to avoid using the interceptor on the refresh call
+                const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
                 const response = await axios.post(
                     `${import.meta.env.VITE_BACKEND_URL}/auth/refresh`,
-                    {},
+                    { refreshToken },
                     { withCredentials: true }
                 );
 
@@ -57,6 +58,7 @@ api.interceptors.response.use(
                 // saaf krdo saab
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
+                localStorage.removeItem("refreshToken");
                 window.location.href = "/login";
                 return Promise.reject(refreshError);
             }

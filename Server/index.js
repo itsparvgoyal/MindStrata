@@ -3,6 +3,7 @@ const authRoutes = require("./routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json());
 const mongoose = require("mongoose");
 const profileRoutes = require("./routes/ProfileRoutes");
@@ -24,9 +25,11 @@ app.use(fileUpload({
     tempFileDir: "/tmp/"
 }));
 
+const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, "") : "";
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: frontendUrl,
     credentials: true,
   })
 );

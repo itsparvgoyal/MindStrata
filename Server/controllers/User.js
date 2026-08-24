@@ -168,19 +168,21 @@ const signUp = async (req, res) => {
         // remove password from response object
         response.password = undefined;
         const user = await User.findById(response._id).populate("additionalDetails").exec();
-
+         
+        const isProduction = process.env.NODE_ENV === "production";
         //  cookie set krlo 
         const options = {
             httpOnly: true,
-            secure: true,
+            secure: isProduction,
             maxAge: 15 * 24 * 60 * 60 * 1000,
-            sameSite:"strict",
+            sameSite: isProduction ? "none" : "lax",
         };
 
         res.cookie("refreshToken", refreshToken, options).status(200).json({
             success: true,
             message: "User created  successfully",
             token: accessToken,
+            refreshToken: refreshToken,
             user: user,
         });
 
@@ -240,19 +242,20 @@ const login = async (req, res) => {
 
         // remove password from user object
         user.password = undefined;
-
+        const isProduction = process.env.NODE_ENV === "production";
         //  cookie set krlo 
         const options = {
             httpOnly: true,
-            secure: true,
+            secure: isProduction,
             maxAge: 15 * 24 * 60 * 60 * 1000,
-            sameSite: "strict",
+            sameSite: isProduction ? "none" : "lax",
         };
         
         res.cookie("refreshToken", refreshToken, options).status(200).json({
             success: true,
             message: "User logged in successfully",
             token: accessToken,
+            refreshToken: refreshToken,
             user: user,
         });
 
@@ -405,7 +408,7 @@ const updateProfile = async (req, res) => {
 
 const refreshAccessToken = async (req, res) => {
     try {
-        const refreshToken = req.cookies.refreshToken;
+        const refreshToken = req.cookies.refreshToken || req.body.refreshToken || req.header("x-refresh-token");
 
         if (!refreshToken) {
             return res.status(401).json({ success: false, message: "Refresh token is missing" });
@@ -443,7 +446,12 @@ const refreshAccessToken = async (req, res) => {
 
 const logout = async (req, res) => {
     try {
-        res.clearCookie("refreshToken");
+        const isProduction = process.env.NODE_ENV === "production";
+        res.clearCookie("refreshToken", {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+        });
         // console.log(req?.user)
 
         // remove refreshToken from db 

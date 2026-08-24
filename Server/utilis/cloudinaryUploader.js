@@ -1,3 +1,4 @@
+const fs = require("fs");
 const cloudinary = require("cloudinary").v2;
 
 exports.uploadFileToCloudinary = async (
@@ -17,8 +18,23 @@ exports.uploadFileToCloudinary = async (
 
     options.public_id = `${Date.now()}`;
 
-    return await cloudinary.uploader.upload(
-        file.tempFilePath,
-        options
-    );
+    try {
+        const response = await cloudinary.uploader.upload(
+            file.tempFilePath,
+            options
+        );
+        
+        // Asynchronously delete the temp file
+        fs.unlink(file.tempFilePath, (err) => {
+            if (err) console.error("Error deleting temp file:", err);
+        });
+        
+        return response;
+    } catch (error) {
+        // Asynchronously delete the temp file even on error
+        fs.unlink(file.tempFilePath, (err) => {
+            if (err) console.error("Error deleting temp file on failure:", err);
+        });
+        throw error;
+    }
 };
