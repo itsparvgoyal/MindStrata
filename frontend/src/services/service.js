@@ -37,7 +37,7 @@ api.interceptors.response.use(
                 // call the /refresh endpoint to get a new access token
                 // we use standard axios here to avoid using the interceptor on the refresh call
                 const response = await axios.post(
-                    "http://localhost:4000/api/v1/auth/refresh",
+                    `${import.meta.env.VITE_BACKEND_URL}/auth/refresh`,
                     {},
                     { withCredentials: true }
                 );
