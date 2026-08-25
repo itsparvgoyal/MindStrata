@@ -66,7 +66,7 @@ const NavBar = () => {
 
   let user;
   let accountType;
-  let dashboardPath = "/dashboard/enrolledCourses";
+  let dashboardPath = "/dashboard";
   if (token) {
     const Userdata = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -74,7 +74,6 @@ const NavBar = () => {
     if (Userdata) {
       user = Userdata.additionalDetails?.image;
       accountType = Userdata.accountType;
-      dashboardPath = accountType === "Instructor" ? "/dashboard/my-courses" : "/dashboard/enrolledCourses";
     }
   }
 

@@ -7,7 +7,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 const Dashboard = () => {
     const [menu, setMenu] = useState(true);
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-    
+
     return (
         <div className="flex h-[calc(100vh-64px)] bg-[#09090b] text-gray-100 overflow-hidden relative">
             <div className="hidden md:flex shrink-0">
@@ -16,12 +16,12 @@ const Dashboard = () => {
 
             {mobileSidebarOpen && (
                 <div className="md:hidden fixed inset-0 z-50 flex">
-                    <div 
+                    <div
                         className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity duration-300"
                         onClick={() => setMobileSidebarOpen(false)}
                     />
-                    
-                    <div className="relative flex w-auto max-w-[260px] h-full flex-1 flex-col bg-[#0d0d11] shadow-2xl transition-transform duration-300">
+
+                    <div className="relative flex w-auto max-w-[260px] h-full flex-1 flex-col bg-[#0d0d11] border-r border-[#1e1e26] shadow-2xl transition-transform duration-300">
                         <div className="absolute top-4 right-4 z-50">
                             <button
                                 onClick={() => setMobileSidebarOpen(false)}
@@ -30,11 +30,11 @@ const Dashboard = () => {
                                 <HiX size={18} />
                             </button>
                         </div>
-                        
-                        <Sidebar 
-                            setMenu={setMenu} 
-                            isMobile={true} 
-                            closeMobileMenu={() => setMobileSidebarOpen(false)} 
+
+                        <Sidebar
+                            setMenu={setMenu}
+                            isMobile={true}
+                            closeMobileMenu={() => setMobileSidebarOpen(false)}
                         />
                     </div>
                 </div>

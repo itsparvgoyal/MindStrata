@@ -33,8 +33,8 @@ const Sidebar = (props) => {
   }
 
   return (
-    <div className="w-[240px] h-full md:h-[calc(100vh-64px)] bg-[#0d0d11] border-r border-[#1e1e26] p-4 flex flex-col justify-between shrink-0 select-none">
-      
+    <div className={`w-[240px] h-full md:h-[calc(100vh-64px)] bg-[#0d0d11] p-4 flex flex-col justify-between shrink-0 select-none ${props.isMobile ? "" : "border-r border-[#1e1e26]"}`}>
+
       <div>
         <div className="border-b border-[#1e1e26] pb-4 mb-4 flex justify-between items-center px-1">
           <h2 className="text-base font-extrabold text-white tracking-tight">
@@ -95,10 +95,9 @@ const Sidebar = (props) => {
                   }}
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors text-sm font-semibold
-                    ${
-                      isActive
-                        ? "bg-white text-gray-950 shadow-[0_2px_10px_rgba(255,255,255,0.15)]"
-                        : "text-gray-400 hover:text-white hover:bg-white/5"
+                    ${isActive
+                      ? "bg-white text-gray-950 shadow-[0_2px_10px_rgba(255,255,255,0.15)]"
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
                     }`
                   }
                 >
@@ -118,10 +117,9 @@ const Sidebar = (props) => {
                   }}
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors text-sm font-semibold
-                    ${
-                      isActive
-                        ? "bg-white text-gray-950 shadow-[0_2px_10px_rgba(255,255,255,0.15)]"
-                        : "text-gray-400 hover:text-white hover:bg-white/5"
+                    ${isActive
+                      ? "bg-white text-gray-950 shadow-[0_2px_10px_rgba(255,255,255,0.15)]"
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
                     }`
                   }
                 >
@@ -140,10 +138,9 @@ const Sidebar = (props) => {
                 }}
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors text-sm font-semibold
-                  ${
-                    isActive
-                      ? "bg-white text-gray-950 shadow-[0_2px_10px_rgba(255,255,255,0.15)]"
-                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                  ${isActive
+                    ? "bg-white text-gray-950 shadow-[0_2px_10px_rgba(255,255,255,0.15)]"
+                    : "text-gray-400 hover:text-white hover:bg-white/5"
                   }`
                 }
               >
