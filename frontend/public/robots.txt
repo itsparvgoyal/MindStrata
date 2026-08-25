@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mindstrata-nu.vercel.app/sitemap.xml
