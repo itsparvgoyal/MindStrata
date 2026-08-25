@@ -1,31 +1,34 @@
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+const { BrevoClient } = require("@getbrevo/brevo");
+const dotenv = require("dotenv");
+dotenv.config();
 
-const mailSender = async(email, title, body) => {
+const brevo = new BrevoClient({
+    apiKey: process.env.BREVO_API_KEY,
+});
+
+const mailSender = async (email, title, body) => {
     try {
-        let transporter = nodemailer.createTransport({
-            host:process.env.MAIL_HOST,
-            port:465,
-            secure:false,
-            auth:{
-                user:process.env.MAIL_USER,
-                pass:process.env.MAIL_PASS,
-            }
+        const data = await brevo.transactionalEmails.sendTransacEmail({
+            sender: {
+                name: process.env.MAIL_NAME,
+                email: process.env.MAIL_USER,
+            },
+            to: [
+                {
+                    email: email,
+                },
+            ],
+            subject: title,
+            htmlContent: body,
         });
 
+        console.log("Email sent:", data.messageId);
 
-        let info = await transporter.sendMail({
-            from:`Mind Strata`,
-            to:`${email}`,
-            subject:`${title}`,
-            html:`${body}`,
-        });
-        
-        // console.log("Info: ", info);
-        return info;
+        return data;
     } catch (error) {
-        console.log("Error in mailSender: ", error);
+        console.error("Brevo error:", error);
+        throw error;
     }
-}
+};
 
 module.exports = mailSender;
