@@ -15,7 +15,8 @@ const Error = () => {
 
           <div>
 
-            <div className="flex items-center gap-2 mb-10">
+            <div className="flex items-center gap-2.5 mb-10">
+               <img src="/favicon.png" alt="MindStrata Logo" className="w-10 h-10 object-contain rounded-[20%]" />
                <span className="text-2xl font-black tracking-tight bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
                  MindStrata
                </span>

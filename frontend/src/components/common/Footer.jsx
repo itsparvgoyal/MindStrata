@@ -37,7 +37,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 md:gap-12 pb-12 border-b border-[#18181b]">
           
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center gap-2.5">
+              <img src="/favicon.png" alt="MindStrata Logo" className="w-8 h-8 object-contain rounded-[20%] " />
               <span className="text-xl font-black tracking-tight bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
                 MindStrata
               </span>
