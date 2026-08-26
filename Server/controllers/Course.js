@@ -156,27 +156,33 @@ const deleteCourse = async (req, res) => {
                 message: "Only instructors can delete courses",
             })
         }
-        
+
         // delete course from all students 
-        const students = await Course.findById({courseID}).studentsEnrolled;
+        // delete course from all students
+        const course = await Course.findById(courseID);
+
+        const students = course.studentsEnrolled;
 
         for (let i = 0; i < students.length; i++) {
             const student = await User.findById(students[i]);
-            student.courses = student.courses.filter((course) => course._id !== courseID);
+
+            student.courses = student.courses.filter(
+                (course) => course._id.toString() !== courseID.toString()
+            );
+
             await student.save();
         }
-
         // delete course from user
         user.courses = user.courses.filter((course) => course._id !== courseID);
         await user.save();
 
         // remove from category 
         const category = await Category.findById(course.category);
-        if(category){
+        if (category) {
             category.courses = category.courses.filter((course) => course._id !== courseID);
             await category.save();
         }
-        
+
         // delete course 
         await Course.findByIdAndDelete(courseID);
 
