@@ -1,8 +1,10 @@
 require("dotenv").config();
 const dbconnect = require("./config/database");
+const express = require("express");
 
 // Connect to MongoDB
 dbconnect();
+const app = express();
 
 app.get("/", (req, res) => {
     res.status(200).send("Worker is running");
