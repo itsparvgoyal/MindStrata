@@ -464,7 +464,7 @@ export const Home = () => {
                 <HiSparkles size={20} />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
-                Learn to choose MindStrata
+                Why choose MindStrata?
               </h3>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Learn from people who have built, shipped and joined real products. Accelerate your career with guided practice.
