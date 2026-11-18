@@ -138,7 +138,7 @@ const updateSubSection = async (req, res) => {
         }
 
         // sub section update
-        const newSubSection = await SubSection.findByIdAndUpdate(subSectionId, updateData, { new: true });
+        const newSubSection = await SubSection.findByIdAndUpdate(subSectionId, updateData, { returnDocument: 'after' });
 
         // Enqueue summary generation job if description or video is updated
         if (isVideoUpdated || isDescriptionUpdated) {

@@ -118,7 +118,7 @@ const enrollStudentsInCourse = async (courses, userID) => {
                     studentsEnrolled: userID
                 }
             },
-            { new: true }
+            { returnDocument: 'after' }
         );
 
         if (!enrolledCourse) {
@@ -132,7 +132,7 @@ const enrollStudentsInCourse = async (courses, userID) => {
                     courses: courseId
                 }
             },
-            { new: true }
+            { returnDocument: 'after' }
         );
     }
 }

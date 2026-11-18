@@ -30,7 +30,7 @@ const updateCourseProgress = async (req, res) => {
         await progress.save();
 
         // add it to user 
-        const updatedUser = await User.findByIdAndUpdate(req.user.id, { $push: { courseProgress: progress._id } }, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(req.user.id, { $push: { courseProgress: progress._id } }, { returnDocument: 'after' });
 
         res.status(200).json({
             success: true,

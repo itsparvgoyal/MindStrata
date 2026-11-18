@@ -58,7 +58,7 @@ const editCategory = async (req, res) => {
             })
         }
 
-        const category = await Category.findByIdAndUpdate(categoryId, { name, description }, {new: true});
+        const category = await Category.findByIdAndUpdate(categoryId, { name, description }, { returnDocument: 'after' });
 
         return res.status(200).json({
             success: true,

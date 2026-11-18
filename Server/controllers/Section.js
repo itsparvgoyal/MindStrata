@@ -53,7 +53,7 @@ const updateSection = async (req, res) => {
             })
         }
         // update section
-        const section = await Section.findByIdAndUpdate(sectionId, { sectionName } , {new : true});
+        const section = await Section.findByIdAndUpdate(sectionId, { sectionName } , { returnDocument: 'after' });
         // return response
         return res.status(200).json({
             success: true,
